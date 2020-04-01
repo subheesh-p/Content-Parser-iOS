@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if #available(iOS 13, *) {
-            // do nothing / do things that should only be done for iOS 13
+            // do nothing
         } else {
-            // do iOS 12 specific window setup
+            // iOS 12 specific window setup
             window = UIWindow(frame: UIScreen.main.bounds)
             
             // Initialize home view controller

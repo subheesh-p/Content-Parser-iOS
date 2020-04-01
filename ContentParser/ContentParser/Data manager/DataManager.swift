@@ -17,8 +17,9 @@ class DataManager {
     ///   - completion: Completion block called after fetching data
     static func contents(for jsonUrl: String, completion: @escaping (JSON?, Error?) -> ()) {
         
-        // Make sure the usl is valid
+        // Make sure the url is valid
         guard let url = URL(string: jsonUrl) else {
+            completion(nil, nil)
             return
         }
         
