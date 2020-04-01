@@ -42,11 +42,11 @@ class HomeViewController: UIViewController {
         
         // Add constraints for content tableview
         contentTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.topAnchor.constraint(equalTo: contentTableView.topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: contentTableView.bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: contentTableView.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: contentTableView.trailingAnchor).isActive = true
+                
+        contentTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        contentTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        contentTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        contentTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
     
@@ -93,10 +93,10 @@ class HomeViewController: UIViewController {
         // Add constraints for activity indicator
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.topAnchor.constraint(equalTo: activityIndicatorView.topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: activityIndicatorView.bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: activityIndicatorView.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: activityIndicatorView.trailingAnchor).isActive = true
+        activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         // Start animating the activity indicator
         activityIndicatorView.startAnimating()
