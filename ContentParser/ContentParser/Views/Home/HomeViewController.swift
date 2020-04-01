@@ -123,6 +123,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ContentTableViewCell.cellIdentifier, for: indexPath) as? ContentTableViewCell {
             cell.content = viewModel.dataArray[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         }
         
