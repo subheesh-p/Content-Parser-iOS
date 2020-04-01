@@ -28,4 +28,9 @@ class ContentDetail {
         self.description = description
         self.imageUrlString = imageUrl
     }
+    
+    /// Method to check whether all the content is empty
+    func isEmpty() -> Bool {
+        return title.isEmpty && description.isEmpty && imageUrlString.isEmpty
+    }
 }

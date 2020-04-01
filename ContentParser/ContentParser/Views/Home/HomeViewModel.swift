@@ -26,8 +26,10 @@ class HomeViewModel {
             let screenTitle = data[DataKey.title].stringValue
             print(screenTitle)
             
-            self.dataArray = data[DataKey.rows].arrayValue.map() { return ContentDetail(with: $0[DataKey.title].stringValue,
+            let allDataArray = data[DataKey.rows].arrayValue.map() { return ContentDetail(with: $0[DataKey.title].stringValue,
                                                                                   description: $0[DataKey.description].stringValue, imageUrl: $0[DataKey.image].stringValue)}
+            // Remove the elements which have an empty content
+            self.dataArray = allDataArray.filter() {$0.isEmpty() == false}
             
             completion(nil)
         }
