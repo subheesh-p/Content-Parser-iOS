@@ -21,10 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let homeViewController = HomeViewController()
-        homeViewController.view.backgroundColor = UIColor.red
         
-        // Add navigation controller
+        // Initialize home view controller
+        let homeViewController = HomeViewController()
+        
+        // Create navigation controller and add it as root view controller
         let navigationController = UINavigationController(rootViewController: homeViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
