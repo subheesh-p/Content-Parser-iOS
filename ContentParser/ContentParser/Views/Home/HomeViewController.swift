@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
                 if let error = errorString {
                     self.showErrorAlert(with: error)
                 } else {
+                    self.title = self.viewModel.screenTitle
                     self.contentTableView.reloadData()
                 }
             }

@@ -13,6 +13,9 @@ class HomeViewModel {
     // Array that contains all the data
     var dataArray = [ContentDetail]()
     
+    // Title for the screen
+    var screenTitle: String?
+    
     /// Method to fetch data from server
     func fetchData(completion: @escaping (String?) -> ()) {
         
@@ -24,9 +27,10 @@ class HomeViewModel {
                 return
             }
             
-            let screenTitle = data[DataKey.title].stringValue
-            print(screenTitle)
+            // Get screen title
+            self.screenTitle = data[DataKey.title].stringValue
             
+            // Get content data
             let allDataArray = data[DataKey.rows].arrayValue.map() { return ContentDetail(with: $0[DataKey.title].stringValue,
                                                                                   description: $0[DataKey.description].stringValue, imageUrl: $0[DataKey.image].stringValue)}
             // Remove the elements which have an empty content
