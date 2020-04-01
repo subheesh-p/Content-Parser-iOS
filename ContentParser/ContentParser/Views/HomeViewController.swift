@@ -9,22 +9,33 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    // Table view that shows the whole content
+    var contentTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureView()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func configureView() {
+        
+        // Set view background colour
+        view.backgroundColor = UIColor.white
+        
+        // Configure tableView
+        contentTableView = UITableView()
+        view.addSubview(contentTableView)
+        
+        // Add constraints for content tableview
+        contentTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.topAnchor.constraint(equalTo: contentTableView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: contentTableView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: contentTableView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: contentTableView.trailingAnchor).isActive = true
     }
-    */
 
 }
+
