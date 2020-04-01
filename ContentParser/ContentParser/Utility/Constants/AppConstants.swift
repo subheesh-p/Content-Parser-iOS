@@ -14,7 +14,7 @@ struct AppConstants {
     static let dataUrlString = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
 }
 
-/// Constants for the data f
+/// Constants for the data 
 struct DataKey {
     static let title = "title"
     static let rows = "rows"
