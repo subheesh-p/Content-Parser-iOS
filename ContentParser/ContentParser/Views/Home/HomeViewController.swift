@@ -10,11 +10,14 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    // Table view that shows the whole content
+    /// Table view that shows the whole content
     var contentTableView: UITableView!
     
-    // View model for home screen
+    /// View model for home screen
     var viewModel = HomeViewModel()
+    
+    /// Activity indicator
+    var activityIndicator: UIActivityIndicatorView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +25,7 @@ class HomeViewController: UIViewController {
         fetchData()
     }
     
-
+    /// Method to configure the UI
     private func configureView() {
         
         // Set view background colour
@@ -34,6 +37,7 @@ class HomeViewController: UIViewController {
         contentTableView.estimatedRowHeight = 100.0
         contentTableView.rowHeight = UITableView.automaticDimension
         contentTableView.dataSource = self
+        contentTableView.tableFooterView = UIView(frame: CGRect.zero)
         view.addSubview(contentTableView)
         
         // Add constraints for content tableview
@@ -49,10 +53,17 @@ class HomeViewController: UIViewController {
     /// Method to fetch data from server
     private func fetchData() {
         
+        // Show activity indicator
+        showActivityIndicator()
+        
         // Fetch data from server
         viewModel.fetchData { (errorString) in
             
             DispatchQueue.main.async {
+                
+                // Dismiss activityIndicator
+                self.dismissActivityIndicator()
+                
                 // Check if any error exist. If yes, then show alert
                 if let error = errorString {
                     self.showErrorAlert(with: error)
@@ -61,7 +72,6 @@ class HomeViewController: UIViewController {
                     self.contentTableView.reloadData()
                 }
             }
-            
         }
     }
     
@@ -72,6 +82,33 @@ class HomeViewController: UIViewController {
         let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(alertAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    /// Show activity indicator
+    private func showActivityIndicator() {
+        let activityIndicatorView = UIActivityIndicatorView(frame: view.bounds)
+        activityIndicatorView.style = .gray
+        view.addSubview(activityIndicatorView)
+        
+        // Add constraints for activity indicator
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.topAnchor.constraint(equalTo: activityIndicatorView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: activityIndicatorView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: activityIndicatorView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: activityIndicatorView.trailingAnchor).isActive = true
+        
+        // Start animating the activity indicator
+        activityIndicatorView.startAnimating()
+        activityIndicator = activityIndicatorView
+    }
+    
+    /// Dismiss activity indicator
+    private func dismissActivityIndicator() {
+        if let activityIndicator = activityIndicator {
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+        }
     }
 
 }
