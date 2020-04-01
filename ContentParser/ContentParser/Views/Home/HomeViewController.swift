@@ -47,6 +47,16 @@ class HomeViewController: UIViewController {
         contentTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         contentTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         contentTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        // Add refresh button in navigation bar
+        let refreshButton = UIButton()
+        refreshButton.setTitle("Refresh", for: .normal)
+        refreshButton.setTitleColor(UIColor.blue, for: .normal)
+        refreshButton.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
+        refreshButton.addTarget(self, action: #selector(refreshButtonClicked(sender:)), for: .touchUpInside)
+        
+        let barButtonItem = UIBarButtonItem(customView: refreshButton)
+        self.navigationItem.rightBarButtonItem = barButtonItem
     }
     
     
@@ -109,6 +119,17 @@ class HomeViewController: UIViewController {
             activityIndicator.stopAnimating()
             activityIndicator.removeFromSuperview()
         }
+    }
+    
+    /// Method invoked on clicking refresh button
+    /// - Parameter sender: button tapped
+    @objc private func refreshButtonClicked(sender: UIButton) {
+        // Clear data from model
+        viewModel.clearData()
+        // Clear data from the view
+        contentTableView.reloadData()
+        // Fetch the data again from server
+        fetchData()
     }
 
 }

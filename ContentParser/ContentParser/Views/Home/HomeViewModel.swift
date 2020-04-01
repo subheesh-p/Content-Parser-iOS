@@ -39,4 +39,9 @@ class HomeViewModel {
             completion(nil)
         }
     }
+    
+    /// Method to clear data
+    func clearData() {
+        dataArray.removeAll()
+    }
 }
