@@ -53,10 +53,24 @@ class HomeViewController: UIViewController {
         viewModel.fetchData { (errorString) in
             
             DispatchQueue.main.async {
-                self.contentTableView.reloadData()
+                // Check if any error exist. If yes, then show alert
+                if let error = errorString {
+                    self.showErrorAlert(with: error)
+                } else {
+                    self.contentTableView.reloadData()
+                }
             }
             
         }
+    }
+    
+    /// Method to show alert
+    /// - Parameter error: Error message to be shown in the alert
+    private func showErrorAlert(with error: String) {
+        let alert = UIAlertController(title: "ALERT", message: error, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

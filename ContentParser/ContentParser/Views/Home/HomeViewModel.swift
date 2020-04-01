@@ -20,6 +20,7 @@ class HomeViewModel {
             
             // Make sure there is no error and data is present
             guard let data = data, error == nil else {
+                completion(error?.localizedDescription)
                 return
             }
             

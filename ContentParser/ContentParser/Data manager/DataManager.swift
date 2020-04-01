@@ -27,7 +27,7 @@ class DataManager {
             
             // Check for error. If error is not empty, return error
             if error != nil {
-                completion(nil, nil)
+                completion(nil, error)
             }
             
             // Make sure data not nil and form the json string from it using the necessary encryption
