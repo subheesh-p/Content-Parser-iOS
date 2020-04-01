@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ContentTableViewCell: UITableViewCell {
     
@@ -36,6 +37,11 @@ class ContentTableViewCell: UITableViewCell {
         didSet {
             titleLabel.text = content?.title
             descriptionLabel.text = content?.description
+            
+            if let imageUrlString = content?.imageUrlString, !imageUrlString.isEmpty {
+                contentImageView.kf.indicatorType = .activity
+                contentImageView.kf.setImage(with: URL(string: imageUrlString))
+            }
         }
     }
     
