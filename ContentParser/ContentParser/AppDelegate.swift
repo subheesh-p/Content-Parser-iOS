@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // do iOS 12 specific window setup
             window = UIWindow(frame: UIScreen.main.bounds)
-            let homeViewController = UIViewController()
+            let homeViewController = HomeViewController()
             homeViewController.view.backgroundColor = UIColor.red
             window?.rootViewController = homeViewController
             window?.makeKeyAndVisible()
