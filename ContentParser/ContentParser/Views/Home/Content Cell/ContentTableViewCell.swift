@@ -33,14 +33,15 @@ class ContentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Content for the cell
     var content: ContentDetail? {
         didSet {
             titleLabel.text = content?.title
             descriptionLabel.text = content?.description
-            
+            // Set a default image 
+            contentImageView.image = UIImage(named: "placeholder")
             if let imageUrlString = content?.imageUrlString, !imageUrlString.isEmpty {
-                contentImageView.kf.indicatorType = .activity
-                contentImageView.kf.setImage(with: URL(string: imageUrlString))
+                contentImageView.kf.setImage(with: URL(string: imageUrlString), placeholder: UIImage(named: "placeholder"))
             }
         }
     }
@@ -70,6 +71,7 @@ class ContentTableViewCell: UITableViewCell {
     private let contentImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
