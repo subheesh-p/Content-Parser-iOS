@@ -57,6 +57,9 @@ class HomeViewController: UIViewController {
         
         let barButtonItem = UIBarButtonItem(customView: refreshButton)
         self.navigationItem.rightBarButtonItem = barButtonItem
+        
+        // Disable refresh button initially. Enable after response from the server is available
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     
@@ -73,6 +76,9 @@ class HomeViewController: UIViewController {
                 
                 // Dismiss activityIndicator
                 self.dismissActivityIndicator()
+                
+                // Enable refresh button
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
                 
                 // Check if any error exist. If yes, then show alert
                 if let error = errorString {
@@ -130,6 +136,8 @@ class HomeViewController: UIViewController {
         contentTableView.reloadData()
         // Fetch the data again from server
         fetchData()
+        // Disable refresh button to avoid further clicks
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
 }
