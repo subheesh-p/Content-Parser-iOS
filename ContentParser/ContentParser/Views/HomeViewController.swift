@@ -12,6 +12,9 @@ class HomeViewController: UIViewController {
     
     // Table view that shows the whole content
     var contentTableView: UITableView!
+    
+    // View model for home screen
+    var viewModel = HomeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,11 @@ class HomeViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: contentTableView.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: contentTableView.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: contentTableView.trailingAnchor).isActive = true
+        
+        // Fetch data from server
+        viewModel.fetchData {
+            
+        }
     }
 
 }
