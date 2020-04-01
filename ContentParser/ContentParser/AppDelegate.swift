@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window = UIWindow(frame: UIScreen.main.bounds)
             let homeViewController = HomeViewController()
             homeViewController.view.backgroundColor = UIColor.red
-            window?.rootViewController = homeViewController
+            
+            // Add navigation controller
+            let navigationController = UINavigationController(rootViewController: homeViewController)
+            window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
         }
         return true
