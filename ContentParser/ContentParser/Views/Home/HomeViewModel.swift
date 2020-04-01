@@ -10,10 +10,11 @@ import UIKit
 
 class HomeViewModel {
     
+    // Array that contains all the data
     var dataArray = [ContentDetail]()
     
     /// Method to fetch data from server
-    func fetchData(completion: @escaping () -> ()) {
+    func fetchData(completion: @escaping (String?) -> ()) {
         
         DataManager.contents(for: AppConstants.dataUrlString) { (data, error) in
             
@@ -28,7 +29,7 @@ class HomeViewModel {
             self.dataArray = data[DataKey.rows].arrayValue.map() { return ContentDetail(with: $0[DataKey.title].stringValue,
                                                                                   description: $0[DataKey.description].stringValue, imageUrl: $0[DataKey.image].stringValue)}
             
-            completion()
+            completion(nil)
         }
     }
 }

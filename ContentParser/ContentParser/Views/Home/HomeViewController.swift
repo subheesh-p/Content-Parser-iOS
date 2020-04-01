@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        fetchData()
     }
     
 
@@ -29,6 +30,10 @@ class HomeViewController: UIViewController {
         
         // Configure tableView
         contentTableView = UITableView()
+        contentTableView.register(ContentTableViewCell.self, forCellReuseIdentifier: ContentTableViewCell.cellIdentifier)
+        contentTableView.estimatedRowHeight = 100.0
+        contentTableView.rowHeight = UITableView.automaticDimension
+        contentTableView.dataSource = self
         view.addSubview(contentTableView)
         
         // Add constraints for content tableview
@@ -38,12 +43,39 @@ class HomeViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: contentTableView.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: contentTableView.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: contentTableView.trailingAnchor).isActive = true
+    }
+    
+    
+    /// Method to fetch data from server
+    private func fetchData() {
         
         // Fetch data from server
-        viewModel.fetchData {
+        viewModel.fetchData { (errorString) in
+            
+            DispatchQueue.main.async {
+                self.contentTableView.reloadData()
+            }
             
         }
     }
 
 }
+
+
+// MARK:- UITableViewDataSource
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.dataArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ContentTableViewCell.cellIdentifier, for: indexPath) as? ContentTableViewCell {
+            cell.content = viewModel.dataArray[indexPath.row]
+            return cell
+        }
+        
+        return UITableViewCell()
+    }
+}
+
 
